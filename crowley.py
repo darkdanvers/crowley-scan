@@ -1,7 +1,7 @@
 import click
 
 from engines import google
-from libs.logging import banner
+from libs import banner
 from vull import sql_injection
 
 @click.command()
@@ -18,5 +18,5 @@ def main(dork):
     sqli.report()
 
 if __name__=='__main__':
-    banner()
+    banner.banner()
     main()
