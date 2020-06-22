@@ -3,6 +3,7 @@ import requests
 from libs.randomize import Randomize
 from libs.parser import Parser
 from libs.logging import *
+from urllib.parse import urlparse
 
 class SqlInjection():
     def __init__(self):
