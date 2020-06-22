@@ -25,8 +25,28 @@ class SqlInjection():
         for target in self.report_targets_vull:
             log_info(target)
 
+    def insert_sqli_payloads(self, url):
+        domains = []
+        parser_url = urlparse(url)
+
+        domain = url.split('?')[0]        
+        querys = parser_url.query.split("&")
+
+        payloads = ("'")
+
+        try:
+            for payload in payloads:
+                domain_with_payload = domain + "?" + ("&".join([query + payload 
+                                                      for query in querys]))
+
+                domains.append(domain_with_payload)
+        except:
+            log_danger("SQL Injector failed to inject SQL into target {0}".format(target))
+        
+        return domains
+
     def check_vull(self, target):
-        targets_with_payloads = self.parser.insert_sqli_payloads(target)
+        targets_with_payloads = self.insert_sqli_payloads(target)
 
         for target in targets_with_payloads:
             user_agent = self.randomize.get_random_user_agent()
