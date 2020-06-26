@@ -36,8 +36,10 @@ pip install -r requirements.txt
 Usage: crowley.py [OPTIONS]
 
 Options:
-  --dork TEXT
-  --help       Show this message and exit.
+  --dork 
+  --max_results 
+  --timeout
+  --help
 ```
 
 <hr>
