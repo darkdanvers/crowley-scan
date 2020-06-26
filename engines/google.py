@@ -7,11 +7,11 @@ from libs.randomize import Randomize
 from libs.logging import log_info
 
 class SearchGoogle():
-    def __init__(self, query, start_page = 0, number_of_results = 100, 
-                timeout = 10):
+    def __init__(self, query, number_of_results = 100,
+                timeout = 1):
 
         self.query = query
-        self.start_page = start_page
+        self.start_page = 0
         self.number_of_results = number_of_results
         self.timeout_requests = timeout        
         self.failed_request = 'Our systems have detected unsual traffic from\
@@ -22,7 +22,7 @@ class SearchGoogle():
         self.parser = Parser()
     
     def search_results(self):
-        parameters = {'q': self.query, 'start': self.start_page, 
+        parameters = {'q': self.query, 'start': self.start_page,
                       'num': self.number_of_results}
         
         user_agent = self.randomize.get_random_user_agent()
