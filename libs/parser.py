@@ -1,5 +1,4 @@
 from urllib.parse import urlparse
-from libs.logging import log_danger 
 
 class Parser():
 
@@ -20,5 +19,3 @@ class Parser():
                             results_parsed.append(url)
 
         return results_parsed
-
-
