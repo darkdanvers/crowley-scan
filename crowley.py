@@ -3,19 +3,23 @@ import click
 from engines import google
 from libs import banner
 from vull import sql_injection
+from vull import reporting
 
 @click.command()
 @click.option('--dork', nargs=1)
-def main(dork):
+@click.option('--max_results', nargs=1, type=click.INT)
+@click.option('--timeout', nargs=1, type=click.INT)
+def main(dork, max_results, timeout):
 
-    search = google.SearchGoogle(dork)
+    search = google.SearchGoogle(dork, max_results, timeout)
     google_results = search.search_results()
     sqli = sql_injection.SqlInjection()
+    report = reporting.ReportVulnerabilities()
 
     for target in google_results:
         sqli.check_vull(target)
     
-    sqli.report()
+    report.create_report()
 
 if __name__=='__main__':
     banner.banner()
