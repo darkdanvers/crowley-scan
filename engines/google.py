@@ -7,8 +7,8 @@ from libs.randomize import Randomize
 from libs.logging import log_info
 
 class SearchGoogle():
-    def __init__(self, query, number_of_results = 100,
-                timeout = 1):
+    def __init__(self, query, number_of_results,
+                timeout):
 
         self.query = query
         self.start_page = 0
