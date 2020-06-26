@@ -4,8 +4,9 @@ from libs.randomize import Randomize
 from libs.parser import Parser
 from libs.logging import *
 from urllib.parse import urlparse
+from vull.reporting import ReportVulnerabilities
 
-class SqlInjection():
+class SqlInjection(ReportVulnerabilities):
     def __init__(self):
         self.parser = Parser()
         self.randomize = Randomize()
@@ -16,15 +17,10 @@ class SqlInjection():
             "MySQL Query fail.",
             "PostgreSQL ERROR",
             "Access Database Engine",
-            "Microsoft Access Driver"
+            "Microsoft Access Driver",
+            "General SQL Server error: Check messages from the SQL Server",
+            "mssql_query"
         ]
-
-    def report(self):
-        print("*" * 79)
-        log_info("Number of vulnerable sites: {0}".format(len(self.report_targets_vull)))
-        
-        for target in self.report_targets_vull:
-            log_info(target)
 
     def insert_sqli_payloads(self, url):
         domains = []
@@ -42,23 +38,40 @@ class SqlInjection():
 
                 domains.append(domain_with_payload)
         except:
-            log_danger("SQL Injector failed to inject SQL into target {0}".format(target))
+            log_error("SQL Injector failed to inject SQL into target {0}".format(target))
         
         return domains
 
+    def check_have_sqli(self, target_response):
+        for error in self.error_list:
+            if error in target_response.text:
+                return True
+        
+        return False
+        
     def check_vull(self, target):
         targets_with_payloads = self.insert_sqli_payloads(target)
 
         for target in targets_with_payloads:
             user_agent = self.randomize.get_random_user_agent()
-            log_info(target)
 
             try:
                 response = requests.get(url=target, headers=user_agent)
+                http_status_code = response.status_code
 
-                for error in self.error_list:
-                    if error in response.text:
-                        log_vulnerable("{0} is vulnerable".format(target))
-                        self.report_targets_vull.append(target)
+                log_info(target)
+
+                have_sqli = self.check_have_sqli(response)
+
+                if have_sqli:
+                    log_vulnerable(target)
+
+                    target_report = {'target': target,
+                                      'user_agent': user_agent,
+                                      'http_status_code': http_status_code,
+                                      'engine': 'google',
+                                      'vulnerabilities': 'SQL Injection'}
+
+                    self.describe_target.append(target_report.copy())
             except:
-                log_danger("{0} have error in request".format(target))
+                log_error("{0} have error in request".format(target))
