@@ -39,7 +39,18 @@ Options:
   --dork 
   --max_results 
   --timeout
+  --threads
   --help
+```
+
+<hr>
+
+## Docker
+
+```
+docker build -t crowley-scan .
+
+docker run -it crowley-scan --dork "news.php?id="
 ```
 
 <hr>
