@@ -1,7 +1,7 @@
 <p align="center">
   <h3 align="center">Crowley scanner</h3>
   <p align="center">
-    Crowley-Scan is a tool to search for and analyze vulnerable targets open to the internet.
+    crowley-scan is a tool to search for targets in search engines like google, bing, DuckDuckgo, etc.
   </p>
 
   <p align="center">
