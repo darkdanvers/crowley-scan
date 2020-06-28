@@ -20,7 +20,7 @@
 #  
 #
 
-FROM python:3
+FROM python:latest
 
 COPY . /crowley-scan
 
