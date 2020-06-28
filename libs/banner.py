@@ -33,7 +33,6 @@ def banner():
 
 Author: bsd0x
 Email: root@bsd0x.me
-Version: v2.0.0
     '''
 
     print(banner)
