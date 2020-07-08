@@ -27,22 +27,13 @@ from lib.parser.parser import Parser
 from lib.logging.logging import *
 from urllib.parse import urlparse
 from vull.reporting import ReportVulnerabilities
+from db.sql_injection_errors import SQL_INJECTION_ERRORS
 
 class SqlInjection(ReportVulnerabilities):
     def __init__(self):
         self.parser = Parser()
         self.user_agent = UserAgent()
         self.report_targets_vull = []
-        self.error_list = [
-            "mysql_fetch_array()", 
-            "You have an error in your SQL syntax",
-            "MySQL Query fail.",
-            "PostgreSQL ERROR",
-            "Access Database Engine",
-            "Microsoft Access Driver",
-            "General SQL Server error: Check messages from the SQL Server",
-            "mssql_query"
-        ]
 
     def insert_sqli_payloads(self, url):
         domains = []
@@ -65,7 +56,7 @@ class SqlInjection(ReportVulnerabilities):
         return domains
 
     def check_have_sqli(self, target_response):
-        for error in self.error_list:
+        for error in SQL_INJECTION_ERRORS:
             if error in target_response.text:
                 return True
         
