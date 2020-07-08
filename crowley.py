@@ -22,8 +22,8 @@
 
 import click
 
-from engines import google
-from libs import banner
+from lib.crawler import google
+from lib.banner import banner
 from vull import sql_injection
 from vull import reporting
 from multiprocessing.dummy import Pool as ThreadPool

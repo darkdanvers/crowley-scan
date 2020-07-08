@@ -20,7 +20,7 @@
 #  
 #  
 
-from libs.logging import log_report_targets_vulnerables
+from lib.logging.logging import log_report_targets_vulnerables
 
 class ReportVulnerabilities():
     describe_target = []

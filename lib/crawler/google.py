@@ -24,9 +24,10 @@ import requests
 
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
-from libs.parser import Parser
-from libs.randomize import Randomize
-from libs.logging import log_info
+from lib.parser.parser import Parser
+from lib.randomize.user_agent import UserAgent
+from lib.randomize.google_domains import GoogleDomains
+from lib.logging.logging import log_info
 
 class SearchGoogle():
     def __init__(self, query, number_of_results,
@@ -40,15 +41,16 @@ class SearchGoogle():
                                 your computer network'
         
         self.filter_string = ["google"]
-        self.randomize = Randomize()
+        self.google_random_domain = GoogleDomains()
+        self.user_agent = UserAgent()
         self.parser = Parser()
     
     def search_results(self):
         parameters = {'q': self.query, 'start': self.start_page,
                       'num': self.number_of_results}
         
-        user_agent = self.randomize.get_random_user_agent()
-        google_url = self.randomize.get_random_google_url()
+        user_agent = self.user_agent.get_random_user_agent()
+        google_url = self.google_random_domain.get_random_google_url()
 
         log_info("Searching")
         log_info(user_agent)

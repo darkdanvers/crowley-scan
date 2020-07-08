@@ -22,16 +22,16 @@
 
 import requests
 
-from libs.randomize import Randomize
-from libs.parser import Parser
-from libs.logging import *
+from lib.randomize.user_agent import UserAgent
+from lib.parser.parser import Parser
+from lib.logging.logging import *
 from urllib.parse import urlparse
 from vull.reporting import ReportVulnerabilities
 
 class SqlInjection(ReportVulnerabilities):
     def __init__(self):
         self.parser = Parser()
-        self.randomize = Randomize()
+        self.user_agent = UserAgent()
         self.report_targets_vull = []
         self.error_list = [
             "mysql_fetch_array()", 
@@ -75,7 +75,7 @@ class SqlInjection(ReportVulnerabilities):
         targets_with_payloads = self.insert_sqli_payloads(target)
 
         for target in targets_with_payloads:
-            user_agent = self.randomize.get_random_user_agent()
+            user_agent = self.user_agent.get_random_user_agent()
 
             try:
                 response = requests.get(url=target, headers=user_agent)
