@@ -70,10 +70,14 @@ class SqlInjection(ReportVulnerabilities):
 
             try:
                 response = requests.get(url=target, headers=user_agent)
-            except:
+            except requests.exceptions.HTTPError:
+                continue
+            except requests.exceptions.ConnectionError:
+                continue
+
+            if response.status_code != 200:
                 log_error("{0} have error in request".format(target))
             
-            http_status_code = response.status_code
             log_info(target)
 
             have_sqli = self.check_have_sqli(response)
@@ -83,7 +87,7 @@ class SqlInjection(ReportVulnerabilities):
 
                 target_report = {'target': target,
                                  'user_agent': user_agent,
-                                 'http_status_code': http_status_code,
+                                 'http_status_code': response.status_code,
                                  'engine': 'google',
                                  'vulnerabilities': 'SQL Injection'}
 
