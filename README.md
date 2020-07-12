@@ -12,7 +12,7 @@
       <img src="https://img.shields.io/badge/License-GPLv3-blue.svg">
     </a>
     <a href="https://github.com/bsd0x/crowley-scan/releases">
-      <img src="https://img.shields.io/badge/version-2.2.1-blue.svg">
+      <img src="https://img.shields.io/badge/version-3.1.1-blue.svg">
     </a>
   </p>
 </p>
