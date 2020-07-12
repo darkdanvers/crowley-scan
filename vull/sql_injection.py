@@ -30,10 +30,11 @@ from vull.reporting import ReportVulnerabilities
 from db.sql_injection_errors import SQL_INJECTION_ERRORS
 
 class SqlInjection(ReportVulnerabilities):
-    def __init__(self):
+    def __init__(self, timeout):
         self.parser = Parser()
         self.user_agent = UserAgent()
         self.report_targets_vull = []
+        self.timeout = timeout
 
     def insert_sqli_payloads(self, url):
         domains = []
@@ -69,10 +70,13 @@ class SqlInjection(ReportVulnerabilities):
             user_agent = self.user_agent.get_random_user_agent()
 
             try:
-                response = requests.get(url=target, headers=user_agent)
+                response = requests.get(url=target, headers=user_agent,
+                                        timeout=self.timeout)
             except requests.exceptions.HTTPError:
                 continue
             except requests.exceptions.ConnectionError:
+                continue
+            except requests.exceptions.ReadTimeout:
                 continue
 
             if response.status_code != 200:

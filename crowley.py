@@ -37,7 +37,7 @@ def main(dork, max_results, timeout, threads):
 
     search = google.SearchGoogle(dork, max_results, timeout)
     google_results = search.search_results()
-    sqli = sql_injection.SqlInjection()
+    sqli = sql_injection.SqlInjection(timeout)
     report = reporting.ReportVulnerabilities()
 
     thread_pool = ThreadPool(threads)
