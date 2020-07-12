@@ -1,7 +1,7 @@
 <p align="center">
   <h3 align="center">Crowley scanner</h3>
   <p align="center">
-    crowley-scan is a tool to search for targets in search engines like google, bing, DuckDuckgo, etc.
+    crowley-scan is a tool to search for targets in Google search engine.
   </p>
 
   <p align="center">
@@ -12,7 +12,7 @@
       <img src="https://img.shields.io/badge/License-GPLv3-blue.svg">
     </a>
     <a href="https://github.com/bsd0x/crowley-scan/releases">
-      <img src="https://img.shields.io/badge/version-2.1.1-blue.svg">
+      <img src="https://img.shields.io/badge/version-2.2.1-blue.svg">
     </a>
   </p>
 </p>
