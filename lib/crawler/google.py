@@ -75,6 +75,7 @@ class SearchGoogle():
         self.links = self.parser.remove_bad_urls(self.filter_string, self.links)
 
         log_info("Number of results: {0}".format(self.__len__()))
+        print("-" * 79)
 
         return self.links
 
