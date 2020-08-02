@@ -5,8 +5,8 @@
   </p>
 
   <p align="center">
-    <a href="https://twitter.com/bsd0x">
-      <img src="https://img.shields.io/badge/twitter-@bsd0x-blue.svg">
+    <a href="https://twitter.com/bsd0x1">
+      <img src="https://img.shields.io/badge/twitter-@bsd0x1-blue.svg">
     </a>
     <a href="https://www.gnu.org/licenses/gpl-3.0">
       <img src="https://img.shields.io/badge/License-GPLv3-blue.svg">
